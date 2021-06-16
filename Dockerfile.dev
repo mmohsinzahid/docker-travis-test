@@ -1,0 +1,6 @@
+FROM node:alpine
+workdir /mnt/frontend/
+copy ./package.json ./
+run npm install
+copy . .
+cmd ["npm","run","start"]
