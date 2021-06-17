@@ -3,7 +3,8 @@
 version: 2.1
 
 orbs:
-  eb: circleci/aws-elastic-beanstalk@1.0.0
+  orbs:
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.0
   node: circleci/node@4.1.0
 
 
@@ -36,17 +37,16 @@ workflows:
   # CircleCI will run this workflow on every commit.
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   sample: 
-    jobs:
-  elastic-beanstalk-workflow:
-    jobs:
-      - build-and-test
-      - eb/deploy:
-          context: aws-creds
-          environment-name: docker-react
-          filters:
-            branches:
-              only:
-                - main
-          label: version-<<pipeline.number>>
-          requires:
-            - build-and-test
+    elastic-beanstalk-workflow:
+      jobs:
+        - build-and-test
+        - eb/deploy:
+            context: aws-creds
+            environment-name: docker-react
+            filters:
+              branches:
+                only:
+                  - main
+            label: version-<<pipeline.number>>
+            requires:
+              - build-and-test
