@@ -30,6 +30,11 @@ jobs:
       - run:
           name: Run tests
           command: npm test
+  eb/deploy:
+    steps:
+      - run:
+        name: "Deploying"
+        command: eb deploy Dockerreact-env
 
 workflows:
   # Below is the definition of your workflow.
