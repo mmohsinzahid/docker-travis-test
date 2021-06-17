@@ -31,11 +31,10 @@ jobs:
           name: Run tests
           command: npm test
   eb/deploy:
+    docker:
+      - image: cimg/node:15.1
     steps:
-      docker:
-        - image: cimg/node:15.1
-      steps:
-        - run: eb deploy Dockerreact-env
+      - run: eb deploy Dockerreact-env
 
 workflows:
   # Below is the definition of your workflow.
